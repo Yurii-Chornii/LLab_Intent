@@ -5,6 +5,8 @@
 //
 // function getBrandFromArray(brandsArray, index) {
 //     // TYPE YOUR CODE ONLY HERE
+//     brandsArray.reverse();
+//     return `Brand: ${brandsArray[index].toLowerCase()}`;
 // }
 //
 // // EXPECTED RESULT (don't touch code below)
@@ -25,12 +27,20 @@
 // // don't change this array
 // const carBrands = ['BMW', 'OPEL', 'AUDI'];
 //
-// function getBrand() {
+// function makeBrandReturnFunction() {
 //     // TYPE YOUR CODE ONLY HERE
+//     let index = 0;
+//     return function (){
+//         const value = carBrands[index];
+//         index++;
+//         if (index === carBrands.length) index = 0;
+//         return value;
+//     }
 // }
 //
 // // EXPECTED RESULT (don't touch code below)
 //
+// const getBrand = makeBrandReturnFunction();
 // const resultA = getBrand()
 // console.log(resultA) // BMW
 //
@@ -48,7 +58,6 @@
 
 
 
-
 // // Homework 3: functions, objects, string prototype methods
 //
 // // don't change this object
@@ -60,6 +69,12 @@
 //
 // function getUserDataStringByFormat(format) {
 //     // TYPE YOUR CODE ONLY HERE
+//     format = format.split(",").map(value => value.trim());
+//     let data = "";
+//     format.forEach(value => {
+//         data += `${user[value]}, ` ;
+//     })
+//     return data.slice(0, -2);
 // }
 //
 // // EXPECTED RESULT (don't touch code below)
@@ -75,14 +90,24 @@
 
 
 
-
 // // Homework 4: functions, objects, Date
 //
 // // You have to create this function getObjectWithDate and it will return an object
 //
 //
 // // TYPE YOUR CODE ONLY HERE
-//
+// const getObjectWithDate = (...rest) => {
+//     const date = new Date();
+//     const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+//     const month = date.getMonth() < 9 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+//     const response = {
+//         currentDay: `${day}/${month}`
+//     }
+//     for(let item of rest){
+//         response[Object.keys(item)[0]] = Object.values(item)[0];
+//     }
+//     return response;
+// }
 //
 // // EXPECTED RESULT (don't touch code below) You have to create this function getObjectWithDate and it will return an object
 // const resultA = getObjectWithDate({ firstName: 'John' }, { phoneNumber: 189920001 })
@@ -90,7 +115,6 @@
 //
 // const resultB = getObjectWithDate({ id: 9188 }, { firstName: 'Martin' }, { email: 'martin.112@gmail.com' })
 // console.log(resultB) // { currentDay: '27/02', id: 9188, firstName: 'Martin', email: 'martin.112@gmail.com' }
-
 
 
 
@@ -102,6 +126,9 @@
 // // You have to create variable with name compiledObject
 //
 // // TYPE YOUR CODE ONLY HERE
+// const compiledObject = Object.assign({}, initData1, initData2);
+// //другий варіант:
+// const compiledObject2 = {...initData1, ...initData2};
 //
 //
 // // EXPECTED RESULT (don't touch code below)
@@ -109,20 +136,22 @@
 
 
 
-
 // // Homework 6: functions, Date, strings
 //
 // function getAgeUpToHours(birthdayDate) {
-//     // TYPE YOUR CODE ONLY HERE
+//     const today = new Date();
+//     const years = today.getMonth() < birthdayDate.getMonth() ? today.getFullYear() - birthdayDate.getFullYear() - 1 : today.getFullYear() - birthdayDate.getFullYear();
+//     const hoursNow = today.getHours();
+//     const hoursOnBirsday = birthdayDate.getHours();
+//     const hours = hoursOnBirsday > hoursNow ? 24 - (hoursOnBirsday - hoursNow) : hoursNow - hoursOnBirsday;
+//     const days = Math.floor((today.getTime() - birthdayDate.setFullYear(today.getMonth() < birthdayDate.getMonth() ? today.getFullYear() - 1 : today.getFullYear())) / 1000 / 60 / 60 / 24);
+//     return `${years} years, ${days} days, ${hours} hours`
 // }
-//
-//
-// // EXPECTED RESULT
+// //
+// //
+// // // EXPECTED RESULT
 // console.log(getAgeUpToHours(new Date('March 15, 1997 21:15'))) // 23 years, 348 days, 23 hours
-// console.log(getAgeUpToHours(new Date(' paste your birth day here '))) // You can paste you birth date and look how old are you ;)
-
-
-
+// console.log(getAgeUpToHours(new Date('April 24, 1998 22:00'))) // You can paste you birth date and look how old are you ;)
 
 
 
@@ -153,6 +182,7 @@
 // }
 //
 // // ADD ONLY ONE LINE OF CODE
+// const {email, address: {postalCode}, cars: [{brand: firstCar, plateNumber: firstCarPlateNumber}, {gear: {type: secondCarGearType}}]} = initData;
 //
 // // EXPECTED RESULT
 // console.log(email) // 'franklin.white@gmail.com'
@@ -160,10 +190,6 @@
 // console.log(firstCarPlateNumber) // 'BC0293AO'
 // console.log(postalCode) // 81000
 // console.log(secondCarGearType) // 'Automatic'
-
-
-
-
 
 
 
@@ -181,6 +207,11 @@
 //
 // function getUpperCasedObjectData() {
 //     // ADD YOUR CODE HERE
+//     const newData = {};
+//     for (let key in initData){
+//         newData[key] = typeof initData[key] === "string" ? initData[key].toUpperCase() : initData[key];
+//     }
+//     return newData;
 // }
 //
 // // EXPECTED RESULT
@@ -198,7 +229,6 @@
 
 
 
-
 // // Homework 9: SET, arrays, functions
 //
 // // don't change this array
@@ -206,6 +236,7 @@
 //
 // function getUniqueArray(array) {
 //     // ADD YOUR CODE HERE
+//     return [...new Set(initArray)]
 // }
 //
 // // EXPECTED RESULT
