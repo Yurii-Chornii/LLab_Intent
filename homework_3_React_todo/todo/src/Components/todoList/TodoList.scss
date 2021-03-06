@@ -1,0 +1,11 @@
+.todo-list {
+  padding: 30px;
+
+  &__form-wrapper {
+    padding: 10px 0;
+
+    input {
+      margin-right: 10px;
+    }
+  }
+}
