@@ -1,7 +1,6 @@
 import {Link, useHistory} from "react-router-dom";
 import {observer} from "mobx-react-lite";
 import MainStore from "../../stores/MainStore";
-import "./SignUp.scss"
 
 const SignUp = observer(() => {
     const history = useHistory();
@@ -13,7 +12,7 @@ const SignUp = observer(() => {
         const password = e.target[1].value;
         const password2 = e.target[2].value;
 
-        if(login && password && password === password2){
+        if (login && password && password === password2) {
             MainStore.signUp(login, password);
             history.push("./signIn");
         } else {
@@ -51,7 +50,9 @@ const SignUp = observer(() => {
             <hr/>
             <div>
                 Already have an account?
-                <Link to="/signIn"><button>Sign in</button></Link>
+                <Link to="/signIn">
+                    <button>Sign in</button>
+                </Link>
             </div>
         </div>
     );

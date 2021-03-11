@@ -1,14 +1,21 @@
-import {Link} from "react-router-dom";
-
-import "./SignIn.scss"
+import {Link, useHistory} from "react-router-dom";
+import MainStore from "../../stores/MainStore";
 import {observer} from "mobx-react-lite";
 
+
 const SignIn = observer(() => {
+    const history = useHistory();
+
+    if (MainStore.isSignedIn) {
+        history.push("/");
+    }
 
     const formHendler = (e: any): void => {
         e.preventDefault();
-        // const login = e.target[0].value;
-        // console.log(login)
+
+        const login = e.target[0].value;
+        const password = e.target[1].value;
+        MainStore.signIn(login, password);
     }
 
     return (
@@ -26,7 +33,7 @@ const SignIn = observer(() => {
                     <label htmlFor="password">
                         Password
                         <br/>
-                        <input type="text" name="password"/>
+                        <input type="password" name="password"/>
                     </label>
                 </div>
                 <button>Sign in</button>
@@ -34,8 +41,11 @@ const SignIn = observer(() => {
             <hr/>
             <div>
                 Don't have an account?
-                <Link to="/signUp"><button>Sign up</button></Link>
+                <Link to="/signUp">
+                    <button>Sign up</button>
+                </Link>
             </div>
+
         </div>
     );
 })
