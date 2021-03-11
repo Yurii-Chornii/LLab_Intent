@@ -7,9 +7,10 @@ import "./TodoList.scss"
 
 const TodoList = observer(() => {
     console.log(mobx.toJS(MainStore.todos));
+
+
     return (
         <div>
-            bla
             {MainStore.todos.map(value => (<div>{value.task}</div>))}
         </div>
     );
