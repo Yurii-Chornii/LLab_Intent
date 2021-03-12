@@ -1,8 +1,18 @@
 package hometask_1;
 
 public class Main {
+
     public static void main(String[] args) {
         //task 1:
+//        Practice in the automatic typing
+//        Write a program that prints prime numbers between [2, 100] to the console.
+//                Use the% operator and loops to accomplish this task.
+
+        for (int i = 2; i < 100; i++) {
+            if (isPrimeNumber(i)) System.out.print(" " + i);
+        }
+
+
 
 
         //task 2:
@@ -26,6 +36,17 @@ public class Main {
 //        System.out.println(box);
 
     }
+
+
+    private static boolean isPrimeNumber(int number) {
+        if (number == 2) return true;
+        for (int i = 2; i < number; i++) {
+            if (number % i == 0) return false;
+        }
+        return true;
+    }
+
+    ;
 }
 
 
