@@ -11,6 +11,7 @@ public class Main {
         myLinkedList.add("3dskfjlls");
         myLinkedList.add("4dskfjlls");
         myLinkedList.add(2,"2new bla bla");
+        System.out.println(myLinkedList.get(myLinkedList.size() - 1));
 
     }
 
