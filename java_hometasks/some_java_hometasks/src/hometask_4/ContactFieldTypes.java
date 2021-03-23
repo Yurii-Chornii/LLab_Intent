@@ -3,7 +3,7 @@ package hometask_4;
 import java.io.Serializable;
 
 public enum ContactFieldTypes implements Serializable {
-    PHONE_CONTACT("Phone"), EMAIL_CONTACT("Email");
+    PHONE_FIELD("Phone"), EMAIL_FIELD("Email");
 
     private static final long serialVersionUID = 1L;
     private String alias;

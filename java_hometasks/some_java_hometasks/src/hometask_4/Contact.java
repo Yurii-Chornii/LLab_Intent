@@ -7,6 +7,7 @@ public class Contact implements Serializable {
     private String firstName;
     private String lastName;
 
+
     public Contact(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;

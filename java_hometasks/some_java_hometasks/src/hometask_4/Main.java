@@ -6,9 +6,22 @@ public class Main {
     private static final String memoryPath = "C:\\Users\\yurac\\OneDrive\\Рабочий стол\\OktenWeb\\LLab_Intent\\java_hometasks\\some_java_hometasks\\src\\hometask_4\\memory\\";
 
     public static void main(String[] args) {
-//        User loginedUser = new User("yura", "1111");
-        User loginedUser = null;
 
+
+        User loginedUser;
+        try{
+            FileInputStream loginedUserFileInputStream = new FileInputStream(memoryPath + "loginedUser.ser");
+            ObjectInputStream loginedUserObjectInputStream = new ObjectInputStream(loginedUserFileInputStream);
+            loginedUser = (User) loginedUserObjectInputStream.readObject();
+        }catch (Exception e){
+            e.printStackTrace();
+            loginedUser = null;
+        }
+
+        System.out.println(loginedUser);
+
+//чисто тести чи створюється новий юзер і чи додаються йому контакти
+        //todo до контакків створити ше АррейЛіст з філдами!
         User testUser = new User("Test", "1111");
         Contact testContact = new Contact("Petro", "Petrenko");
         testUser.addContact(testContact);
@@ -19,15 +32,28 @@ public class Main {
 
         String answer = "";
 
+
         try {
             do {
                 if (loginedUser == null) {
                     System.out.println("Натисніть 1 щоб зареєструватись або 2 щоб увійти");
                     answer = bufferedReader.readLine();
 
-
                     if (answer.equals("1")) {
-                        System.out.println("ви натиснули 1");
+
+                        System.out.println("Введіть ваш логін");
+                        answer = bufferedReader.readLine();
+                        String login = answer;
+
+                        System.out.println("Введіть ваш пароль");
+                        answer = bufferedReader.readLine();
+                        String password = answer;
+
+                        User user = new User(login, password);
+                        loginedUser = user;
+
+
+
 
 
                     } else if (answer.equals("2")) {
