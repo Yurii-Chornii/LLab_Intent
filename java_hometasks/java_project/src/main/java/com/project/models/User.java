@@ -12,6 +12,10 @@ public class User implements Serializable {
     private final String password;
     private List<Contact> contacts = new ArrayList<>();
 
+    public Long getId() {
+        return id;
+    }
+
     public User(String login, String password) {
         this.id = new Date().getTime();
         this.login = login;

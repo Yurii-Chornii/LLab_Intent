@@ -7,11 +7,20 @@ import java.util.List;
 
 public interface IService {
     boolean logIn(String login, String password);
-    boolean logOut();
+
+    void logOut();
+
     boolean signIn(User user);
-    List<User> getAllRegisteredUsers();
+
     List<Contact> getAllContacts();
+
     User getLoginedUser();
-    boolean saveContacts(List<Contact> contacts);
+
     boolean findTheSameLogin(String login);
+
+    boolean addNewContact(String firstName, String lastName, String phomeNumber);
+
+    boolean deleteAllContacts();
+
+    boolean updateRegisteredUsers(User updatedUser);
 }

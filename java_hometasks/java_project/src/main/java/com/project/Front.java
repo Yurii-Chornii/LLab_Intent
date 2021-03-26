@@ -1,11 +1,13 @@
 package com.project;
 
+import com.project.models.Contact;
 import com.project.models.User;
 import com.project.services.MainService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class Front {
 
@@ -71,15 +73,30 @@ public class Front {
                         break;
                     case "1":
                         System.out.println("Список ваших контактів:");
+                        List<Contact> contacts = mainService.getAllContacts();
+                        if (contacts == null) {
+                            System.out.println("У вас немає жодного контакту");
+                        } else contacts.forEach(System.out::println);
                         break;
                     case "2":
                         System.out.println("Видалення всіх контактів");
+                        mainService.deleteAllContacts();
                         break;
                     case "3":
                         System.out.println("Додавання нового контакту");
+                        System.out.println("Введіть ім'я контакту");
+                        String firstName = bufferedReader.readLine();
+                        System.out.println("Введіть прізвище контакту");
+                        String lastName = bufferedReader.readLine();
+                        System.out.println("Введіть номер телефону контакту");
+                        String phoneNumber = bufferedReader.readLine();
+                        if (mainService.addNewContact(firstName, lastName, phoneNumber)) {
+                            System.out.println("Контакт додано");
+                        } else System.out.println("Контакт не було додано");
                         break;
                     case "4":
                         System.out.println("Розлогінення");
+                        mainService.logOut();
                         break;
 
                 }

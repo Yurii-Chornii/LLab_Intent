@@ -16,13 +16,13 @@ public class FilesRepository implements IRepository {
 
     @Override
     public boolean saveRegisteredUsers(List<User> users) {
-        try{
+        try {
             FileOutputStream outputStream = new FileOutputStream(memoryPath + "registeredUsers.ser");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
             objectOutputStream.writeObject(users);
             objectOutputStream.close();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
