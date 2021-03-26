@@ -6,6 +6,7 @@ import com.project.models.User;
 import com.project.repositories.FilesRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MainService implements IService {
     private User loginedUser = null;
@@ -22,8 +23,14 @@ public class MainService implements IService {
 
 
     @Override
-    public boolean logIn(User user) {
-        return false;
+    public boolean logIn(String login, String password) {
+        List<User> registeredUsers = filesRepository.getRegisteredUsers();
+        Optional<User> founding = registeredUsers.stream().filter(item -> item.getLogin().equals(login) && item.getPassword().equals(password)).findFirst();
+        if (!founding.isPresent()){
+            return false;
+        }
+        loginedUser = founding.get();
+        return true;
     }
 
     @Override

@@ -2,21 +2,20 @@ package com.project.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
-    private static int value = 1;
-    private final int id;
+    private final Long id;
     private final String login;
     private final String password;
     private List<Contact> contacts = new ArrayList<>();
 
     public User(String login, String password) {
-        this.id = value;
+        this.id = new Date().getTime();
         this.login = login;
         this.password = password;
-        value++;
     }
 
     public String getLogin() {

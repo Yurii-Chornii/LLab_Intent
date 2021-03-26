@@ -6,7 +6,7 @@ import com.project.models.User;
 import java.util.List;
 
 public interface IService {
-    boolean logIn(User user);
+    boolean logIn(String login, String password);
     boolean logOut();
     boolean signIn(User user);
     List<User> getAllRegisteredUsers();
