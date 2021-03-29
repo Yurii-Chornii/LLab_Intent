@@ -1,7 +1,6 @@
 package com.example.springhomework1.services;
 
 import com.example.springhomework1.models.Topic;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ import java.util.List;
 @Service
 public class TopicsList {
 
-    public List<Topic> getTopicList(){
+    public List<Topic> getTopicList() {
         List<Topic> topics = new ArrayList<>();
 
         topics.add(new Topic(

@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "isLogined",
+      "type": "java.lang.String",
+      "description": "Description for isLogined."
+    }
+  ] }

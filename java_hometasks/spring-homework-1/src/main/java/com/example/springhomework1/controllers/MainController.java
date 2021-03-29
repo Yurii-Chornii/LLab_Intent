@@ -1,5 +1,6 @@
 package com.example.springhomework1.controllers;
 
+import com.example.springhomework1.Greeting;
 import com.example.springhomework1.models.Topic;
 import com.example.springhomework1.services.TopicsList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,36 +19,39 @@ public class MainController {
     @Autowired
     TopicsList TopicsList;
 
+    @Autowired
+    Greeting greeting;
+
     @GetMapping("/topic")
-    public List<Topic> getTopics(){
+    public List<Topic> getTopics() {
         return TopicsList.getTopicList();
     }
 
     @GetMapping("/topic/name/{name}")
-    public Topic getTopic(@PathVariable("name") String name){
+    public Topic getTopic(@PathVariable("name") String name) {
         List<Topic> foundedTopics = TopicsList
                 .getTopicList()
                 .stream()
                 .filter(topic -> topic.getName().equals(name))
                 .collect(Collectors.toList());
-        if(foundedTopics.size() == 0) return null;
+        if (foundedTopics.size() == 0) return null;
         return foundedTopics.get(0);
     }
 
     @GetMapping("/topic/theme/{theme}")
-    public List<Topic> getTopicsFilteredByTheme(@PathVariable("theme") String theme){
+    public List<Topic> getTopicsFilteredByTheme(@PathVariable("theme") String theme) {
         List<Topic> foundedTopics = TopicsList
                 .getTopicList()
                 .stream()
                 .filter(topic -> topic.getTheme().equals(theme))
                 .collect(Collectors.toList());
-        if(foundedTopics.size() == 0) return null;
+        if (foundedTopics.size() == 0) return null;
         return foundedTopics;
     }
 
     @GetMapping("/topic/order")
-    public List<Topic> getOrderedTopics(@RequestParam Boolean order){
-        if (order){
+    public List<Topic> getOrderedTopics(@RequestParam Boolean order) {
+        if (order) {
             return TopicsList
                     .getTopicList()
                     .stream()
