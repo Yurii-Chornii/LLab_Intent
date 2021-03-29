@@ -31,10 +31,17 @@ public class FilesRepository implements IRepository {
     @Override
     public List<User> getRegisteredUsers() {
         List<User> registeredUsers = new ArrayList<>();
+//        registeredUsers.add(new User("yura", "1111"));
+//        registeredUsers.add(new User("admin", "admin"));
+//        registeredUsers.add(new User("root", "root"));
         try {
+//            FileOutputStream outputStream = new FileOutputStream(memoryPath + "registeredUsers.ser");
+//            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+//            objectOutputStream.writeObject(registeredUsers);
             FileInputStream fileInputStream = new FileInputStream(memoryPath + "registeredUsers.ser");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             registeredUsers = (List<User>) objectInputStream.readObject();
+//            objectOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
