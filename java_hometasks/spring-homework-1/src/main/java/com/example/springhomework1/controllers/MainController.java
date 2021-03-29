@@ -22,6 +22,11 @@ public class MainController {
     @Autowired
     Greeting greeting;
 
+    @GetMapping("/hello")
+    public String hello(){
+        return greeting.sayHello();
+    }
+
     @GetMapping("/topic")
     public List<Topic> getTopics() {
         return TopicsList.getTopicList();
