@@ -1,6 +1,6 @@
-package com.example.springhomework1.services;
+package com.example.springhomework1.homework.services;
 
-import com.example.springhomework1.models.Topic;
+import com.example.springhomework1.homework.models.Topic;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

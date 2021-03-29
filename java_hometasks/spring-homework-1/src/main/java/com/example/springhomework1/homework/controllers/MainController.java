@@ -1,8 +1,8 @@
-package com.example.springhomework1.controllers;
+package com.example.springhomework1.homework.controllers;
 
-import com.example.springhomework1.Greeting;
-import com.example.springhomework1.models.Topic;
-import com.example.springhomework1.services.TopicsList;
+import com.example.springhomework1.homework.Greeting;
+import com.example.springhomework1.homework.models.Topic;
+import com.example.springhomework1.homework.services.TopicsList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

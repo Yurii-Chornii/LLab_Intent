@@ -1,4 +1,4 @@
-package com.example.springhomework1;
+package com.example.springhomework1.homework;
 
 
 public class GreetingIfNotLogined implements Greeting {

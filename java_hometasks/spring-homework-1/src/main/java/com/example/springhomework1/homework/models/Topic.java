@@ -1,4 +1,4 @@
-package com.example.springhomework1.models;
+package com.example.springhomework1.homework.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

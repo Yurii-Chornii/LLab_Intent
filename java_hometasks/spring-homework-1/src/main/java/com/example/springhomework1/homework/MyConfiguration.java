@@ -1,4 +1,4 @@
-package com.example.springhomework1;
+package com.example.springhomework1.homework;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
