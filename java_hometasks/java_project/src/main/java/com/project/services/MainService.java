@@ -8,7 +8,6 @@ import com.project.repositories.FilesRepository;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class MainService implements IService {
     private User loginedUser = null;
