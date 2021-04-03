@@ -9,5 +9,4 @@ public interface IRepository {
     boolean saveRegisteredUsers(List<User> users);
     List<User> getRegisteredUsers();
     List<Contact> getUserContacts(Long id);
-    boolean saveUserContacts(List<Contact> contacts, String userLogin);
 }

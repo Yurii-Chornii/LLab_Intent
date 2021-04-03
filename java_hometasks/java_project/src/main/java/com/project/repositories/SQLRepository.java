@@ -9,10 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLRepository implements IRepository {
-    private final String DATABASE_URL = "jdbc:mysql://localhost:3306/?serverTimezone=UTC";
+    private final String DATABASE_URL = "jdbc:mysql://localhost:3306/jdbc_homework?serverTimezone=UTC";
     private static final String USER_NAME = "root";
     private static final String USER_PASSWORD = "backspace";
-
 
     @Override
     public boolean saveRegisteredUsers(List<User> users) {
@@ -25,7 +24,7 @@ public class SQLRepository implements IRepository {
         try {
             Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, USER_PASSWORD);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM loginedusers;");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM registered_users;");
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getLong(1));
@@ -43,9 +42,13 @@ public class SQLRepository implements IRepository {
     public List<Contact> getUserContacts(Long id) {
         List<Contact> contactList = new ArrayList<>();
         try {
+            String query = String.format(
+                    "SELECT * FROM contacts WHERE user_ID=%d;",
+                    id
+            );
             Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, USER_PASSWORD);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM contacts WHERE user_ID = ${id};");
+            ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 Contact contact = new Contact();
                 contact.setID(resultSet.getLong(2));
@@ -57,12 +60,65 @@ public class SQLRepository implements IRepository {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
         return contactList;
     }
 
-    @Override
-    public boolean saveUserContacts(List<Contact> contacts, String userLogin) {
-        return false;
+    public void saveUser(User user) {
+        long id = user.getId();
+        String login = user.getLogin();
+        String password = user.getPassword();
+        try {
+            String query = String.format(
+                    "INSERT INTO registered_users " +
+                            "(id, login, password) " +
+                            "VALUES (%d, \"%s\", \"%s\");",
+                    id,
+                    login,
+                    password
+            );
+            Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, USER_PASSWORD);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void saveContact(Contact contact, long userId) {
+        long id = contact.getID();
+        String firstName = contact.getFIRSTNAME();
+        String lastName = contact.getLASTNAME();
+        String phoneNumber = contact.getPHONE_NUMBER();
+        try {
+            String query = String.format(
+                    "INSERT INTO contacts " +
+                            "(user_ID, contact_ID, first_name, last_name, phone_number) " +
+                            "VALUES (%d, %d, \"%s\", \"%s\", \"%s\");",
+                    userId,
+                    id,
+                    firstName,
+                    lastName,
+                    phoneNumber
+            );
+            Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, USER_PASSWORD);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void deleteAllContacts(long userId) {
+        try {
+            String query = String.format(
+                    "DELETE FROM contacts WHERE user_ID=%d;",
+                    userId
+            );
+            Connection connection = DriverManager.getConnection(DATABASE_URL, USER_NAME, USER_PASSWORD);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

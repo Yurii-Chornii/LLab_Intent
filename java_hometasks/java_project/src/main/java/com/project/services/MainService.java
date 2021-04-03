@@ -13,6 +13,7 @@ public class MainService implements IService {
     private User loginedUser = null;
     private final FilesRepository filesRepository = new FilesRepository();
 
+    @Override
     public void setLoginedUser(User user) {
         this.loginedUser = user;
     }
@@ -26,7 +27,11 @@ public class MainService implements IService {
     @Override
     public boolean logIn(String login, String password) {
         List<User> registeredUsers = filesRepository.getRegisteredUsers();
-        Optional<User> founding = registeredUsers.stream().filter(item -> item.getLogin().equals(login) && item.getPassword().equals(password)).findFirst();
+        Optional<User> founding = registeredUsers.stream()
+                .filter(item -> item.getLogin().equals(login)
+                        &&
+                        item.getPassword().equals(password))
+                .findFirst();
         if (!founding.isPresent()) {
             return false;
         }
@@ -35,15 +40,15 @@ public class MainService implements IService {
     }
 
     @Override
-    public boolean signIn(User user) {
-        List<User> registeredUsers = filesRepository.getRegisteredUsers();
-        registeredUsers.add(user);
-        return filesRepository.saveRegisteredUsers(registeredUsers);
+    public void logOut() {
+        loginedUser = null;
     }
 
     @Override
-    public void logOut() {
-        loginedUser = null;
+    public boolean signUp(User user) {
+        List<User> registeredUsers = filesRepository.getRegisteredUsers();
+        registeredUsers.add(user);
+        return filesRepository.saveRegisteredUsers(registeredUsers);
     }
 
 

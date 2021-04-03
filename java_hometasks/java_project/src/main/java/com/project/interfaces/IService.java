@@ -10,11 +10,13 @@ public interface IService {
 
     void logOut();
 
-    boolean signIn(User user);
+    boolean signUp(User user);
 
     List<Contact> getAllContacts();
 
     User getLoginedUser();
+
+    void setLoginedUser(User loginedUser);
 
     boolean findTheSameLogin(String login);
 

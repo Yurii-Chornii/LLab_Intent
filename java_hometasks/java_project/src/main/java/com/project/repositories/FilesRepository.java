@@ -45,9 +45,4 @@ public class FilesRepository implements IRepository {
     public List<Contact> getUserContacts(Long id) {
         return null;
     }
-
-    @Override
-    public boolean saveUserContacts(List<Contact> contacts, String userLogin) {
-        return false;
-    }
 }
