@@ -2,12 +2,10 @@ package com.example.springhomework1.homework.controllers;
 
 import com.example.springhomework1.homework.Greeting;
 import com.example.springhomework1.homework.models.Topic;
+import com.example.springhomework1.homework.repositories.TopicRepository;
 import com.example.springhomework1.homework.services.TopicsList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -20,10 +18,13 @@ public class MainController {
     TopicsList TopicsList;
 
     @Autowired
+    private TopicRepository topicRepository;
+
+    @Autowired
     Greeting greeting;
 
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         return greeting.sayHello();
     }
 
@@ -32,26 +33,19 @@ public class MainController {
         return TopicsList.getTopicList();
     }
 
+    @PostMapping("/saveTopic")
+    public void saveTopic(@RequestBody() Topic topic) {
+        topicRepository.save(topic);
+    }
+
     @GetMapping("/topic/name/{name}")
     public Topic getTopic(@PathVariable("name") String name) {
-        List<Topic> foundedTopics = TopicsList
-                .getTopicList()
-                .stream()
-                .filter(topic -> topic.getName().equals(name))
-                .collect(Collectors.toList());
-        if (foundedTopics.size() == 0) return null;
-        return foundedTopics.get(0);
+        return topicRepository.getTopicByName(name);
     }
 
     @GetMapping("/topic/theme/{theme}")
     public List<Topic> getTopicsFilteredByTheme(@PathVariable("theme") String theme) {
-        List<Topic> foundedTopics = TopicsList
-                .getTopicList()
-                .stream()
-                .filter(topic -> topic.getTheme().equals(theme))
-                .collect(Collectors.toList());
-        if (foundedTopics.size() == 0) return null;
-        return foundedTopics;
+        return topicRepository.getTopicsByTheme(theme);
     }
 
     @GetMapping("/topic/order")
