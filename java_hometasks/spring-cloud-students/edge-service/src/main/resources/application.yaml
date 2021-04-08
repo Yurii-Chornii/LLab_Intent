@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:8765}
+
+spring:
+  application:
+    name: edge-service
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    registryFetchIntervalSeconds: 5
+    instanceInfoReplicationIntervalSeconds: 5
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://${EUREKA_CLIENT_SERVICE_URL_HOSTNAME:localhost}:${EUREKA_CLIENT_SERVICE_URL_PORT:8761}/eureka/
+
+zuul:
+  ignoredServices: '*'
+  prefix: /api
+  sensitiveHeaders:
+  routes:
+    user-service:
+      path: /users/**
+      serviceId: user-service
+      stripPrefix: false
+    ticket-service:
+      path: /tickets/**
+      serviceId: ticket-service
+      stripPrefix: false
