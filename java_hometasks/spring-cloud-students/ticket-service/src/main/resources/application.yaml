@@ -5,7 +5,7 @@ spring:
   application:
     name: ticket-service
   datasource:
-    url: jdbc:mysql://localhost:3306/tickets?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://localhost:3306/ticketsisg?createDatabaseIfNotExist=true&serverTimezone=UTC&useSSL=false
     username: root
     password: backspace
   jpa:
