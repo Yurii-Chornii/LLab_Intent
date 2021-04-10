@@ -1,17 +1,16 @@
-package com.intentsg.service.user.controller;
+package com.intentsg.service.ticket.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
-@RequestMapping("/users")
-public class TestController {
+@RequestMapping("/tickets")
+public class TicketController {
 
 	@GetMapping("/test")
 	public ResponseEntity test() {
-		return ResponseEntity.ok("user-service");
+		return ResponseEntity.ok("ticket-service");
 	}
 }
