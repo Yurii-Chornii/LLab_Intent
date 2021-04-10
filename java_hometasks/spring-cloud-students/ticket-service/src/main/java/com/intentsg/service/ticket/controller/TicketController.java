@@ -49,7 +49,6 @@ public class TicketController {
     @GetMapping("/getUserTickets/{userId}")
     public ResponseEntity<List<Ticket>> getUserTickets(@PathVariable long userId) {
         List<Ticket> ticketList = ticketRepository.findAllUserTickets(userId);
-        System.out.println(ticketList);
         return new ResponseEntity(ticketList, HttpStatus.OK);
     }
 }
